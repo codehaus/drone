@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  -  Copyright 2002-2004 Geert Bevin <gbevin[remove] at uwyn dot com>
+  -  Distributed under the terms of the GNU General Public License, v2 or later
+  -  $Id$
+  -->
+
+<!ELEMENT drone		(server|bot)*>
+
+<!ELEMENT server	(output?,address+)>
+<!ATTLIST server	name ID #REQUIRED>
+
+<!ELEMENT output	EMPTY>
+<!ATTLIST output	max CDATA #REQUIRED
+					amount CDATA #REQUIRED
+					interval CDATA #REQUIRED>
+
+<!ELEMENT address	EMPTY>
+<!ATTLIST address	name CDATA #REQUIRED
+					port CDATA "6667">
+
+<!ELEMENT bot		(channel|module)*>
+<!ATTLIST bot		name ID #REQUIRED
+					nick CDATA #REQUIRED
+					altnick CDATA #REQUIRED
+					realname CDATA #REQUIRED
+					servername IDREF #REQUIRED>
+
+<!ELEMENT channel	EMPTY>
+<!ATTLIST channel	name CDATA #REQUIRED>
+
+<!ELEMENT module	(property*)>
+<!ATTLIST module	classname CDATA #REQUIRED>
+
+<!ELEMENT property	(#PCDATA)>
+<!ATTLIST property	name CDATA #REQUIRED>
+

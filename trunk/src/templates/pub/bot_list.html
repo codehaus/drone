@@ -1,0 +1,36 @@
+<!--I 'common.blueprint_pub'/-->
+<!--BV 'window_title'-->UWYN Drone<!--/BV-->
+<!--BV 'content'-->
+	<div class="log_header">
+		<b>UWYN Drone</b>
+	</div>
+	<table summary="available drones" width="100%" class="list_table">
+	<colgroup>
+		<col width="*"/>
+		<col width="*"/>
+		<col width="*"/>
+		<col width="100%" />
+	</colgroup>
+	<tr>
+		<th nowrap="1">name</th>
+		<th nowrap="1">active nick</th>
+		<th nowrap="1">nicks</th>
+		<th nowrap="1">channels</th>
+	</tr>
+	<!--V 'bots'/-->
+	<!--B 'bot'-->
+	<tr valign="top">
+		<td nowrap="1"><!--V 'botname'/--></td>
+		<td nowrap="1"><!--V 'connected_nick'/--></td>
+		<td nowrap="1"><!--V 'nicks'/--></td>
+		<td>
+			<p><!--V 'servers'/--></p>
+			<!--B 'server'-->
+				<b><!--V 'server'/--></b> : <!--V 'channels'/--><!--B 'channel'--><a href="[!V 'EXIT:QUERY:show_channel_log'/]"><!--V 'channel'/--></a> <!--/B-->
+			<!--/B-->
+		</td>
+	</tr>
+	<!--/B-->
+	</table>
+<!--/BV-->
+

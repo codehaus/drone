@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  -  Copyright 2002-2004 Geert Bevin <gbevin[remove] at uwyn dot com>
+  -  Distributed under the terms of the GNU Lesser General Public
+  -  License, v2.1 or later
+  -  $Id$
+  -->
+
+<!DOCTYPE drone SYSTEM "/dtd/drone.dtd">
+
+<drone>
+	<server name="freenode">
+		<output	 max="1500"
+				 amount="25"
+				 interval="1000"/>
+		<address name="irc.freenode.net"
+				 port="6667"/>
+	</server>
+	
+	<bot name="testbot"
+		 nick="DroneBot"
+		 altnick="DroneBot_"
+		 realname="UWYN's Drone Bot (http://drone.dev.java.net)"
+		 servername="freenode">
+		<channel name="#drone"/>
+		<module classname="com.uwyn.drone.modules.Version"/>
+		<module classname="com.uwyn.drone.modules.Ping"/>
+		<module classname="com.uwyn.drone.modules.Help"/>
+		<module classname="com.uwyn.drone.modules.Faq"/>
+		<module classname="com.uwyn.drone.modules.Log"/>
+		<module classname="com.uwyn.drone.modules.Say"/>
+		<module classname="com.uwyn.drone.modules.Seen"/>
+		<module classname="com.uwyn.drone.modules.Register"/>
+		<module classname="com.uwyn.drone.modules.Identify">
+			<property name="nick">Nickserv</property>
+			<property name="password">thedrone</property>
+		</module>
+	</bot>
+</drone>
+

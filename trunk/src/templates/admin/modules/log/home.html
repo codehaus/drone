@@ -1,0 +1,19 @@
+<!--I 'common.blueprint_authenticated'/-->
+
+<!--I 'admin.modules.log.menu'/-->
+
+<!--BV 'window_title'-->UWYN Drone - Modules - Log<!--/BV-->
+<!--BV 'page_title'-->Administration of the Log Module<!--/BV-->
+<!--BV 'authenticated_content'-->
+	<p>This module provides logging of all test that appears on a channel.</p>
+	
+	<table class="collapsed_table">
+	<tr>
+		<form action="[!V 'EXIT:FORM:log_install'/]" method="GET"><!--V 'EXIT:PARAMS:log_install'/--><td><input name="submit" type="submit" value="Install the log module" /></td></form>
+		<form action="[!V 'EXIT:FORM:log_remove'/]" method="GET"><!--V 'EXIT:PARAMS:log_remove'/--><td><input name="submit" type="submit" value="Remove the log module" /></td></form>
+	</tr>
+	</table>
+	<script>
+	document.forms[0].submit.focus();
+	</script>
+<!--/BV-->
