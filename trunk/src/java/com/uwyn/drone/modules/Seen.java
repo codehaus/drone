@@ -214,19 +214,15 @@ public class Seen extends AbstractModule
 	public void channelMessage(Bot bot, Channel channel, String nick, ServerMessage fullMessage)
 	throws CoreException
 	{
-		// don't log bot commands
-		if (!fullMessage.getTrailing().startsWith("!"))
+		SeenData		seen_data = new SeenData(nick, new Timestamp(Calendar.getInstance().getTimeInMillis()), fullMessage.getTrailing(), fullMessage.getRaw());
+		DatabaseSeen	database_seen = DatabaseSeenFactory.get();
+		try
 		{
-			SeenData		seen_data = new SeenData(nick, new Timestamp(Calendar.getInstance().getTimeInMillis()), fullMessage.getTrailing(), fullMessage.getRaw());
-			DatabaseSeen	database_seen = DatabaseSeenFactory.get();
-			try
-			{
-				database_seen.recordSeen(bot, channel, seen_data);
-			}
-			catch (SeenManagerException e)
-			{
-				Logger.getLogger("com.uwyn.drone.modules").severe(ExceptionUtils.getExceptionStackTrace(e));
-			}
+			database_seen.recordSeen(bot, channel, seen_data);
+		}
+		catch (SeenManagerException e)
+		{
+			Logger.getLogger("com.uwyn.drone.modules").severe(ExceptionUtils.getExceptionStackTrace(e));
 		}
 	}
 

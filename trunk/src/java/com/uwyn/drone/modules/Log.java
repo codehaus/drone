@@ -152,18 +152,14 @@ public class Log extends AbstractModule
 	public void channelMessage(Bot bot, Channel channel, String nick, ServerMessage fullMessage)
 	throws CoreException
 	{
-		// don't log commands
-		if (!fullMessage.getTrailing().startsWith("!"))
+		DatabaseLogs	database_log = DatabaseLogsFactory.get();
+		try
 		{
-			DatabaseLogs	database_log = DatabaseLogsFactory.get();
-			try
-			{
-				database_log.addLog(bot, channel, fullMessage);
-			}
-			catch (LogManagerException e)
-			{
-				Logger.getLogger("com.uwyn.drone.modules").severe(ExceptionUtils.getExceptionStackTrace(e));
-			}
+			database_log.addLog(bot, channel, fullMessage);
+		}
+		catch (LogManagerException e)
+		{
+			Logger.getLogger("com.uwyn.drone.modules").severe(ExceptionUtils.getExceptionStackTrace(e));
 		}
 	}
 	
