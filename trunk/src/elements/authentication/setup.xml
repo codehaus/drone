@@ -9,7 +9,7 @@
 <!DOCTYPE element SYSTEM "/dtd/element.dtd">
 
 <element extends="authentication/admin.xml">
-	<initparam name="role">setup</initparam>
+	<property name="role">setup</property>
 </element>
 
 

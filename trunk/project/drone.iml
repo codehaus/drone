@@ -13,7 +13,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../lib/rife-0.7.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../lib/rife-0.8.0_pre.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -22,7 +22,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../lib/postgres-jdbc-7.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/../lib/postgres-jdbc-7.4-214-jdbc3.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -31,7 +31,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../lib/mysql-connector-java-3.0.11-stable-bin.jar!/" />
+          <root url="jar://$MODULE_DIR$/../lib/mysql-connector-java-3.0.14-stable-bin.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

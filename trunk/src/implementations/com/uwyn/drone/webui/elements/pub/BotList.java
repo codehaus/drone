@@ -14,7 +14,6 @@ import com.uwyn.drone.core.BotFactory;
 import com.uwyn.drone.core.BotsRunner;
 import com.uwyn.drone.core.Channel;
 import com.uwyn.rife.engine.Element;
-import com.uwyn.rife.rep.Rep;
 import com.uwyn.rife.site.ValidationError;
 import com.uwyn.rife.template.Template;
 import com.uwyn.rife.tools.SortListComparables;
@@ -55,7 +54,7 @@ public class BotList extends Element
 	{
 		setOutput("day", ChannelLog.DATE_FORMAT.format(Calendar.getInstance(TimeZone.getTimeZone("GMT")).getTime()));
 		
-		Collection	bots = ((BotsRunner)Rep.getParticipant("com.uwyn.drone.core.DroneParticipant").getObject()).getBots();
+		Collection	bots = BotsRunner.getRepInstance().getBots();
 		Iterator	bots_it = bots.iterator();
 		Bot			bot = null;
 		while (bots_it.hasNext())

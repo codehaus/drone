@@ -15,6 +15,7 @@
     
     <element id="AUTH_ADMIN" file="authentication/admin.xml"/>
     <element id="AUTH_SETUP" file="authentication/setup.xml"/>
+    <element id="AUTH_WEB" file="authentication/web.xml"/>
     
     <subsite id="ADMIN" file="admin.xml" urlprefix="/admin" inherits="AUTH_ADMIN"/>
     <subsite id="PUB" file="pub.xml"/>

@@ -83,10 +83,10 @@ public class com_mysql_jdbc_Driver extends DatabaseLogs
 				.from(sCreateTableLog.getTable())
 				.field("moment")
 				.field("raw")
+				.orderBy("moment", Select.DESC)
 				.whereParameter("botname", "=")
 				.whereParameterAnd("channel", "=")
-				.whereParameterAnd("servername", "=")
-				.orderBy("moment", Select.DESC);
+				.whereParameterAnd("servername", "=");
 		}
 
 		if (null == sGetLogMessages)
@@ -96,12 +96,12 @@ public class com_mysql_jdbc_Driver extends DatabaseLogs
 				.from(sCreateTableLog.getTable())
 				.field("moment")
 				.field("raw")
+				.orderBy("moment", Select.DESC)
 				.whereParameter("botname", "=")
 				.whereParameterAnd("channel", "=")
 				.whereParameterAnd("servername", "=")
 				.whereParameterAnd("moment", "begin", ">=")
-				.whereParameterAnd("moment", "end", "<")
-				.orderBy("moment", Select.DESC);
+				.whereParameterAnd("moment", "end", "<");
 		}
 
 		if (null == sDropTableLog)

@@ -9,5 +9,5 @@
 <!DOCTYPE element SYSTEM "/dtd/element.dtd">
 
 <element implementation="com.uwyn.rife.engine.elements.PrintTemplate">
-	<initparam name="template_name">admin.modules.seen.home</initparam>
+	<property name="template_name">admin.modules.seen.home</property>
 </element>

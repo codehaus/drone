@@ -33,6 +33,7 @@
     	<flowlink srcexit="back_to_list" destid="LIST"/>
     </element>
 
-    <element id="DOWNLOAD_LOG" file="pub/download_channel_log.xml" url="/downloadchannellog">
-    </element>
+    <element id="DOWNLOAD_LOG" file="pub/download_channel_log.xml" url="/downloadchannellog"/>
+
+    <element id="MESSAGE" file="pub/message.xml" url="/message" inherits="^AUTH_WEB"/>
 </site>

@@ -56,11 +56,6 @@ public class AttributeCode extends EnumClass
 		super(code);
 	}
 
-	public EnumClass construct(Object identifier)
-	{
-		return _construct(ResponseCode.class, identifier);
-	}
-	
 	public static AttributeCode get(String code)
 	{
 		return (AttributeCode)AttributeCode.getMember(AttributeCode.class, code);

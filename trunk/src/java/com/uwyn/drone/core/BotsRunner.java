@@ -10,6 +10,7 @@ package com.uwyn.drone.core;
 import com.uwyn.drone.core.Bot;
 import com.uwyn.drone.core.BotsRunnerListener;
 import com.uwyn.drone.core.exceptions.CoreException;
+import com.uwyn.rife.rep.Rep;
 import com.uwyn.rife.tools.ExceptionUtils;
 import java.util.Collection;
 import java.util.HashSet;
@@ -23,7 +24,7 @@ public class BotsRunner extends Thread implements BotListener
 	
 	private Throwable	mBotError = null;
 	private HashSet		mBotsRunnerListeners = null;
-	private Integer	mBotsRunnerListenersMonitor = new Integer(0);
+	private Integer		mBotsRunnerListenersMonitor = new Integer(0);
 	
 	public BotsRunner(Collection bots)
 	{
@@ -31,6 +32,11 @@ public class BotsRunner extends Thread implements BotListener
 		
 		mBots = bots;
 		mBotsRunnerListeners = new HashSet();
+	}
+	
+	public static BotsRunner getRepInstance()
+	{
+		return (BotsRunner)Rep.getParticipant("com.uwyn.drone.core.DroneParticipant").getObject();
 	}
 	
 	public Collection getBots()

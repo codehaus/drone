@@ -9,8 +9,8 @@
 <!DOCTYPE element SYSTEM "/dtd/element.dtd">
 
 <element extends="rife/authenticated/memory.xml">
-	<initparam name="template_name">authentication.admin</initparam>
-	<initparam name="role">admin</initparam>
+	<property name="template_name">authentication.admin</property>
+	<property name="role">admin</property>
 	
 	<submission name="credentials">
 		<param name="login"/>
