@@ -1,0 +1,65 @@
+<!--I 'common.blueprint_pub'/-->
+<!--BV 'window_title'-->UWYN Drone<!--/BV-->
+<!--BV 'content'-->
+	<div class="log_header">
+		<b>UWYN Drone</b>
+	</div>
+	
+	<!--V 'page_content'/-->
+	<!--BV 'page_content'-->
+		<form action="[!V 'SUBMISSION:FORM:sendMessage'/]" method="post">
+		<!--V 'SUBMISSION:PARAMS:sendMessage'/-->
+	
+		<table summary="command" cellpadding="5" cellspacing="0" border="0">
+		<tr>
+			<td class="discrete">authid</td>
+			<td>&nbsp;</td>
+			<td class="discrete"><div id="authid"><!--V 'INPUT:authid'/--></div></td>
+		</tr>
+		<tr>
+			<td><label for="bot"><b>bot</b></label></td>
+			<td>&nbsp;</td>
+			<td[!V 'MARK:bot'][!/V]>
+				<!--V 'ERRORS:bot'--><!--/V-->
+				<select name="bot">
+					<!--V 'options'/-->
+					<!--B 'option'--><option><!--V 'bot'/--></option><!--/B-->
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><label for="target"><b>target</b></label></td>
+			<td>&nbsp;</td>
+			<td[!V 'MARK:target'][!/V]>
+				<!--V 'ERRORS:target'--><!--/V-->
+				<!--V 'FORM:INPUT:target'-->id="target"<!--/V-->
+			</td>
+		</tr>
+		<tr>
+			<td><label for="message"><b>message</b></label></td>
+			<td>&nbsp;</td>
+			<td[!V 'MARK:message'][!/V]>
+				<!--V 'ERRORS:message'--><!--/V-->
+				<!--V 'FORM:TEXTAREA:message'-->cols="80" rows="5"<!--/V-->
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+			<td><p><input type="submit" value="Send message" /></p></td>
+		</tr>
+		</table>
+		</form>
+		<script type="text/javascript">
+		document.getElementById('target').focus();
+		</script>
+		<!--B 'ERRORS:*'--><div class="errors"><!--V 'ERRORS'/--></div><!--/B-->
+		<!--B 'ERRORMESSAGE:*'--><!--V 'ERRORMESSAGE'/--><br /><!--/B-->
+		<!--B 'MARK:ERROR'--> class="mark_error"<!--/B-->
+		<!--B 'MANDATORY:*'-->mandatory<!--/B-->
+		</form>
+	<!--/BV-->
+	<!--B 'page_content_executed'-->
+	<p>The message has been sent by the bot.</p>
+	<!--/B-->
+<!--/BV-->
+

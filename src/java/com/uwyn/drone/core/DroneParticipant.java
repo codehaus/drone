@@ -10,6 +10,7 @@ package com.uwyn.drone.core;
 import com.uwyn.drone.core.BotsRunner;
 import com.uwyn.rife.rep.BlockingParticipant;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DroneParticipant extends BlockingParticipant
 {
@@ -17,7 +18,6 @@ public class DroneParticipant extends BlockingParticipant
 	
 	public DroneParticipant()
 	{
-		setName("DroneParticipant");
 		setInitializationMessage("Starting the IRC bot ...");
 	}
 	
@@ -35,7 +35,7 @@ public class DroneParticipant extends BlockingParticipant
 		return mBotsRunner;
 	}
 
-	protected ArrayList _getObjects(Object key)
+	protected List _getObjects(Object key)
 	{
 		ArrayList objects_list = new ArrayList();
 

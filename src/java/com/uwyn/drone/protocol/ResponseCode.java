@@ -162,11 +162,6 @@ public class ResponseCode extends EnumClass
 		mDescription = description;
 	}
 
-	public EnumClass construct(Object identifier)
-	{
-		return _construct(ResponseCode.class, identifier);
-	}
-	
 	public static ResponseCode get(String code)
 	{
 		return (ResponseCode)ResponseCode.getMember(ResponseCode.class, code);

@@ -12,6 +12,7 @@
 	<user login="drone">
         <password>password</password>
         <role>admin</role>
+        <role>web</role>
     </user>
 	<user login="setup">
         <password>password</password>

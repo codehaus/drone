@@ -8,12 +8,8 @@
 
 <!DOCTYPE element SYSTEM "/dtd/element.dtd">
 
-<element extends="rife/logout/template/memory.xml">
-	<property name="template_name">admin.loggedout</property>
-	<property name="authvar_name">authid</property>
-	
-	<exit name="back_to_entrance"/>
+<element implementation="com.uwyn.drone.webui.elements.pub.Message">
+	<submission name="sendMessage">
+		<bean classname="com.uwyn.drone.webui.elements.pub.Message$Submission"/>
+	</submission>
 </element>
-
-
-

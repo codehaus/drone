@@ -15,7 +15,7 @@ import com.uwyn.drone.core.Bot;
 import com.uwyn.drone.modules.exceptions.FaqManagerException;
 import com.uwyn.drone.modules.faqmanagement.FaqManager;
 import com.uwyn.rife.database.exceptions.DatabaseException;
-import com.uwyn.rife.database.exceptions.InnerClassException;
+import com.uwyn.rife.tools.InnerClassException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public abstract class DatabaseFaqs extends DbQueryManager implements FaqManager
 					}
 				});
 		}
-		catch (DatabaseException e) 
+		catch (DatabaseException e)
 		{
 			throw new InstallErrorException(e);
 		}

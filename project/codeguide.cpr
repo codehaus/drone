@@ -3,7 +3,6 @@
     <SourceDirectories>
         <Directory relativePath="../src/implementations" absolutePath="/data/Workspace/drone/src/implementations/"/>
         <Directory relativePath="../src/java" absolutePath="/data/Workspace/drone/src/java/"/>
-        <Directory relativePath="../../rife/src/framework" absolutePath="/data/Workspace/rife/src/framework/"/>
     </SourceDirectories>
     <ProjectDirectories>
         <Directory relativePath=".." absolutePath="/data/Workspace/drone/"/>
@@ -13,9 +12,9 @@
         <Directory relativePath="../jetty/lib/org.mortbay.jetty.jar" absolutePath="/data/Workspace/drone/jetty/lib/org.mortbay.jetty.jar"/>
         <Directory absolutePath="$TOOLS_JAR$"/>
         <Directory relativePath="../src" absolutePath="/data/Workspace/drone/src/"/>
-        <Directory relativePath="../lib/rife-0.7.2.jar" absolutePath="/data/Workspace/drone/lib/rife-0.7.2.jar"/>
-        <Directory relativePath="../lib/mysql-connector-java-3.0.11-stable-bin.jar" absolutePath="/data/Workspace/drone/lib/mysql-connector-java-3.0.11-stable-bin.jar"/>
-        <Directory relativePath="../lib/postgres-jdbc-7.4.jar" absolutePath="/data/Workspace/drone/lib/postgres-jdbc-7.4.jar"/>
+        <Directory relativePath="../lib/rife-0.8.0_pre.jar" absolutePath="/data/Workspace/drone/lib/rife-0.8.0_pre.jar"/>
+        <Directory absolutePath="/data/Workspace/drone/lib/mysql-connector-java-3.0.14-stable-bin.jar"/>
+        <Directory relativePath="../lib/postgres-jdbc-7.4-214-jdbc3.jar" absolutePath="/data/Workspace/drone/lib/postgres-jdbc-7.4-214-jdbc3.jar"/>
     </LibraryClassDirectories>
     <Targets active="0">
         <Target commandLine="etc/jetty.xml" name="Default" java2RuntimeVmType="" java2DebugVmType="CLASSIC" vmOptions="-Djetty.home=. -Drife.webapp.path=../src:../build/classes:../lib">
@@ -23,7 +22,7 @@
             <File relativePath="../jetty/lib/org.mortbay.jetty.jar/org/mortbay/jetty/Server.class" absolutePath="/data/Workspace/drone/jetty/lib/org.mortbay.jetty.jar/org/mortbay/jetty/Server.class"/>
         </Target>
     </Targets>
-    <CompilerOptions targetVM="1.4" generateDebugInfo="true" showCompilerWarnings="false" showDeprecationWarnings="false" languageVersion="JAVA_1_5" maximumHeapSize="128" otherOptions=""/>
+    <CompilerOptions targetVM="1.4" generateDebugInfo="true" showCompilerWarnings="false" showDeprecationWarnings="false" languageVersion="JAVA_1_4" maximumHeapSize="128" otherOptions=""/>
     <BuildExclusionPattern>CVS</BuildExclusionPattern>
     <BuildExclusionPattern>SCCS</BuildExclusionPattern>
     <BuildExclusionPattern>.svn</BuildExclusionPattern>
