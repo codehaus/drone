@@ -13,7 +13,7 @@
         <Directory relativePath="../jetty/lib/org.mortbay.jetty.jar" absolutePath="/data/Workspace/drone/jetty/lib/org.mortbay.jetty.jar"/>
         <Directory absolutePath="$TOOLS_JAR$"/>
         <Directory relativePath="../src" absolutePath="/data/Workspace/drone/src/"/>
-        <Directory relativePath="../lib/rife-0.7.2_pre.jar" absolutePath="/data/Workspace/drone/lib/rife-0.7.2_pre.jar"/>
+        <Directory relativePath="../lib/rife-0.7.2.jar" absolutePath="/data/Workspace/drone/lib/rife-0.7.2.jar"/>
         <Directory relativePath="../lib/mysql-connector-java-3.0.11-stable-bin.jar" absolutePath="/data/Workspace/drone/lib/mysql-connector-java-3.0.11-stable-bin.jar"/>
         <Directory relativePath="../lib/postgres-jdbc-7.4.jar" absolutePath="/data/Workspace/drone/lib/postgres-jdbc-7.4.jar"/>
     </LibraryClassDirectories>
