@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <title>Drone : ConfigurationBot</title>
+	    <link rel="stylesheet" href="styles/site.css" type="text/css" />
+    </head>
+
+    <body>
+	    <table class="pagecontent" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff">
+		    <tr>
+			    <td valign="top" class="pagebody">
+				    <div class="pageheader">
+					    <span class="pagetitle">
+                            Drone : ConfigurationBot
+                                                    </span>
+				    </div>
+				    <div class="pagesubheading">
+					    This page last changed on Jun 18, 2004 by <font color="#0050B2">gbevin</font>.
+				    </div>
+
+				    <p class="paragraph">The most important file is <tt class="monospaced">drone.xml</tt>. It allows you to configure your bot exactly as you want.</p>Below is a sample configuration file:
+
+<div class="code"><pre>&lt;&#63;xml version=&quot;1.0&quot; encoding=&quot;ISO&#45;8859&#45;1&quot;&#63;&gt;&#10;&lt;&#33;DOCTYPE drone SYSTEM &quot;/dtd/drone.dtd&quot;&gt;&#10;&#10;&lt;drone&gt;&#10;    &lt;server name=&quot;codehaus&quot;&gt;&#10;        &lt;output max=&quot;1500&quot; amount=&quot;25&quot; interval=&quot;1000&quot;/&gt;&#10;        &lt;address name=&quot;irc.codehaus.org&quot; port=&quot;6667&quot;/&gt;&#10;    &lt;/server&gt;&#10;    &#10;    &lt;bot name=&quot;testbot&quot;&#10;         nick=&quot;TestBot&quot; altnick=&quot;TestBot&#95;&quot;&#10;         realname=&quot;UWYN&#039;s Drone Bot (http&#58;//drone.codehaus.org/)&quot;&#10;         servername=&quot;codehaus&quot;&gt;&#10;         &#10;        &lt;channel name=&quot;#drone&quot;/&gt;&#10;        &#10;        &lt;module classname=&quot;com.uwyn.drone.modules.Version&quot;/&gt;&#10;        &lt;module classname=&quot;com.uwyn.drone.modules.Ping&quot;/&gt;&#10;        &lt;module classname=&quot;com.uwyn.drone.modules.Help&quot;/&gt;&#10;        &lt;module classname=&quot;com.uwyn.drone.modules.Faq&quot;/&gt;&#10;        &lt;module classname=&quot;com.uwyn.drone.modules.Log&quot;/&gt;&#10;        &lt;module classname=&quot;com.uwyn.drone.modules.Seen&quot;/&gt;&#10;    &lt;/bot&gt;&#10;&lt;/drone&gt;</pre></div><p class="paragraph">You can use the tag overview below to customize this to your needs.</p><div class="panel"><div class="panelContent" style="background-color: #ddeedd; ">
+<p class="paragraph"><b class="strong">If you use modules that store information, you&#039;ll probably want to <a href="ConfigurationDatabase.html">configure the database</a> next.</b></p>
+</div></div><p class="paragraph"><h2 class="heading2"> Supported tags</h2></p><h3 class="heading3"> &lt;drone&gt;</h3><p class="paragraph">This is the root tag and has to be used to start the configuration.</p><h3 class="heading3"> &lt;server&gt;</h3><p class="paragraph">Declares a new server.</p>The following attributes are available:
+
+<table class="wikitable">
+<tr>
+<td><b class="strong">name</b></td><td>the name of the server that will be used later to refer to it</td>
+</tr>
+</table>
+<h3 class="heading3"> &lt;output&gt;</h3><p class="paragraph">Configures the output rate at which messages can be sent to the server. It&#039;s important to tune this well, otherwise the bot might be kicked from the server due to excess flood.</p>This tag is optional, if it&#039;s omitted, sensible default values will apply.<p class="paragraph">The following attributes are available:</p><table class="wikitable">
+<tr>
+<td><b class="strong">max</b></td><td>The amount of bytes that can be spewed out in one go when the buffer is empty, if more text is available the buffer will be filled and slowly emptied.</td>
+</tr><tr>
+<td><b class="strong">interval</b></td><td>The interval at which the buffered text will be emptied.</td>
+</tr><tr>
+<td><b class="strong">amount</b></td><td>The amount of bytes that will be sent at each interval</td>
+</tr>
+</table>
+<h3 class="heading3"> &lt;address&gt;</h3><p class="paragraph">An address at which the server can be reached. You can add as many <tt class="monospaced">address</tt> tags as you want, they will be tried in the order of declaration in case some of them might not be reachable.</p>The following attributes are available:
+
+<table class="wikitable">
+<tr>
+<td><b class="strong">name</b></td><td>the domain name or ip address of the IRC server</td>
+</tr><tr>
+<td><b class="strong">port</b></td><td>the port where it can be reached, this attribute is optional and defaults to 6667 if it&#039;s not specified</td>
+</tr>
+</table>
+<h3 class="heading3"> &lt;bot&gt;</h3><p class="paragraph">Creates a new bot that will run on an earlier defined server.</p>You can create as many bots as you like and the shipped modules will seperate the information according to the bots that you configured. So if you want to maintain different FAQs for different channels, just create different bots.<p class="paragraph">The following attributes are available:</p><table class="wikitable">
+<tr>
+<td><b class="strong">name</b></td><td>The unique name of this bot. This name will be used to refer to the bot and to store the information in the database.</td>
+</tr><tr>
+<td><b class="strong">nick</b></td><td>The nickname that the bot should use on IRC.</td>
+</tr><tr>
+<td><b class="strong">altnick</b></td><td>The alternative nickname that the bot should use in case the primary nickname is taken.</td>
+</tr><tr>
+<td><b class="strong">realname</b></td><td>The real name of the bot that will show when people request information about your bot through IRC.</td>
+</tr><tr>
+<td><b class="strong">servername</b></td><td>The server name to which the bot will connect. This has to correspond to the name of an earlier defined server.</td>
+</tr>
+</table>
+<h3 class="heading3"> &lt;channel&gt;</h3><p class="paragraph">Makes the bot join a channel.</p>You can define as many channels as you want, the bot will join them all.<p class="paragraph">The following attributes are available:</p><table class="wikitable">
+<tr>
+<td><b class="strong">name</b></td><td>The name of the channel that has to be joined</td>
+</tr>
+</table>
+<h3 class="heading3"> &lt;module&gt;</h3><p class="paragraph">Defines a module that should be activated for this bot.</p>You can define as many modules as you want, they will be activated in the order you declare them.<p class="paragraph">The following attributes are available:</p><table class="wikitable">
+<tr>
+<td><b class="strong">classname</b></td><td>The fully quantified class name of a Java class that extends the <tt class="monospaced"><span class="nobr"><a href="http://drone.codehaus.org/docs/api/com/uwyn/drone/core/Module.html">Module<sup><img src="./icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="&gt;&gt;" border="0"/></sup></a></span></tt> interface</td>
+</tr>
+</table>
+
+				    
+                    			    </td>
+		    </tr>
+	    </table>
+	    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				<td height="12" background="border/border_bottom.gif"><img src="border/spacer.gif" width="1" height="1" border="0"/></td>
+			</tr>
+		    <tr>
+			    <td align="center"><font color="grey">Document generated by Confluence on Jun 18, 2004 09:44</font></td>
+		    </tr>
+	    </table>
+    </body>
+</html>
