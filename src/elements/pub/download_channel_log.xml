@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  -  Copyright 2002-2004 Geert Bevin <gbevin[remove] at uwyn dot com>
+  -  Distributed under the terms of the GNU Lesser General Public
+  -  License, v2.1 or later
+  -  $Id$
+  -->
+
+<!DOCTYPE element SYSTEM "/dtd/element.dtd">
+
+<element implementation="com.uwyn.drone.webui.elements.pub.DownloadChannelLog" contenttype="">
+	<input name="botname"/>
+	<input name="channelname"/>
+	<input name="day"/>
+</element>

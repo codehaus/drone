@@ -1,0 +1,190 @@
+/*
+ * Copyright 2002-2004 Geert Bevin <gbevin[remove] at uwyn dot com>
+ * Distributed under the terms of the GNU Lesser General Public
+ * License, v2.1 or later
+ *
+ * $Id$
+ */
+body
+{
+	marginwidth: 0px;
+	marginheight: 0px;
+	topmargin: 0px;
+	leftmargin: 0px;
+	color: #000000;
+	background-color: #ffffff;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 10pt;
+	margin: 0px;
+	padding: 0px
+}
+
+a
+{
+	color: #042d56;
+}
+
+a:visited
+{
+	color: #4b4b4b;
+}
+
+td
+{
+	font-family: arial, helvetica, sans-serif;
+	font-size: 10pt;
+}
+
+input
+{
+	color: #000000;
+	border: 1px solid #000000;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 10pt;
+	padding: 2px;
+}
+
+input[type=submit]
+{
+	background: #eeeeff;
+	color: #000033;
+	border: 1px solid #000033;
+}
+
+input[type=reset]
+{
+	background: #eeeeff;
+}
+
+input:hover
+{
+	color: #003300;
+	background: #eeffdd;
+	border-color: #003300;
+}
+
+input:focus
+{
+	color: #003300;
+	background: #eeffdd;
+	border-color: #003300;
+}
+
+#input_disabled
+{
+	background: #ffffff;
+	color: #999999;
+	border: 1px solid #999999;
+}
+
+textarea
+{
+	color: #000033;
+	background: #eeeeff;
+	border: 1px solid #000033;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 10pt;
+	padding: 2px;
+}
+
+select
+{
+	color: #000033;
+	background: #eeeeff;
+	border: 1px solid #000033;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 10pt;
+	padding: 2px;
+}
+
+
+#error_area {
+	display: inline-block;
+	border: solid red 1px;
+	padding: 3px;
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	text-align: justify;
+	background: rgb(255, 220, 220);
+	color: red;
+}
+
+#error_area p {
+	display: block;
+	margin: 0px;
+	padding: 0px;
+}
+
+.collapsed_table
+{
+	border: 0px;
+	border-collapse: collapse;
+}
+
+.collapsed_table td
+{
+	padding: 0px;
+}
+
+.content td
+{
+	padding: 10px;
+}
+
+.content td td
+{
+	padding: 2px;
+}
+
+.log_header
+{
+	padding: 2px 5px;
+	font-size: 9pt;
+	text-align: center;
+}
+
+.list_table
+{
+	border: 0px;
+	border-collapse: collapse;
+	margin: 0px;
+}
+
+.list_table th
+{
+	border: 1px solid #666666;
+	background-color: #f8f8f8;
+	padding: 2px 5px;
+	font-weight: bold;
+	font-size: 10pt;
+}
+
+.list_table td
+{
+	padding: 2px 5px;
+	font-size: 10pt;
+}
+
+.copyright_area td
+{
+	border-top: 1px solid #999999;
+	background-color: #dddddd;
+}
+
+.time
+{
+	text-align: center;
+}
+
+.time *
+{
+	font-family: fixed;
+	font-size: 8pt;
+}
+                                                                                
+.nickname
+{
+        text-align: right;
+}

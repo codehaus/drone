@@ -1,0 +1,17 @@
+<!--I 'common.blueprint_authenticated'/-->
+
+<!--I 'admin.modules.seen.menu'/-->
+<!--BV 'class_seen_install'-->menu_item_active<!--/BV-->
+
+<!--BV 'window_title'-->UWYN Drone - Modules - Seen - Install<!--/BV-->
+<!--BV 'page_title'-->Install the Seen Module<!--/BV-->
+<!--BV 'authenticated_content'-->
+	<p>Are you sure that you want to install the Seen module?</p>
+	<form name="confirm" action="[!V 'SUBMISSION:FORM:confirm'/]" method="post">
+	<!--V 'SUBMISSION:PARAMS:confirm'/-->
+		<input type="submit" value="Yes, I'm sure" />
+	</form>
+<!--/BV-->
+<!--B 'installed_content'-->
+	The Seen module has been installed successfully.
+<!--/B-->
