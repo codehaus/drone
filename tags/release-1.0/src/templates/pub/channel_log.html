@@ -1,0 +1,38 @@
+<!--I 'common.blueprint_pub'/-->
+<!--BV 'window_title'-->UWYN Drone<!--/BV-->
+<!--BV 'content'-->
+	<div class="log_header">
+		<table width="100%">
+		<colgroup>
+			<col width="*" />
+			<col width="100%" />
+			<col width="*" />
+		</colgroup>
+		<tr>
+			<td nowrap="1"><a href="[!V 'EXIT:QUERY:show_previous'/]">&lt;&lt;</a></td>
+			<td align="center"><!--V 'day'/--> : <b><!--V 'botname'/--></b> on <b><!--V 'channelname'/--></b> at <!--V 'servername'/--> <!--V 'download'/--><!--BV 'download'-->[<a href="[!V 'EXIT:QUERY:download'/]">download</a>] <!--/BV-->[<a href="[!V 'EXIT:QUERY:back_to_list'/]">back</a>]</td>
+			<td nowrap="1"><a href="[!V 'EXIT:QUERY:show_next'/]">&gt;&gt;</a></td>
+		</tr>
+		</table>
+	</div>
+	<table summary="channel log" width="100%" class="list_table">
+	<colgroup>
+		<col width="*" />
+		<col width="*" />
+		<col width="100%" />
+	</colgroup>
+	<tr>
+		<th nowrap="1">time</th>
+		<th nowrap="1">nick</th>
+		<th nowrap="1">message</th>
+	</tr>
+	<!--V 'messages'/-->
+	<!--B 'message'-->
+	<tr valign="top" bgcolor="#[!V 'bgcolor'/]">
+		<td nowrap="1" class="time"><p><!--V 'time'/--></p></td>
+		<td nowrap="1" class="nickname"><p>&lt;<!--V 'nickname'/-->&gt;</p></td>
+		<td class="message"><p><!--V 'message'/--></p></td>
+	</tr>
+	<!--/B-->
+	</table>
+<!--/BV-->
