@@ -1,0 +1,19 @@
+<!--I 'common.blueprint_authenticated'/-->
+
+<!--I 'admin.modules.seen.menu'/-->
+
+<!--BV 'window_title'-->UWYN Drone - Modules - Seen<!--/BV-->
+<!--BV 'page_title'-->Administration of the Seen Module<!--/BV-->
+<!--BV 'authenticated_content'-->
+	<p>This module records when someone was last seen in a channel.</p>
+	
+	<table class="collapsed_table">
+	<tr>
+		<form action="[!V 'EXIT:FORM:seen_install'/]" method="GET"><!--V 'EXIT:PARAMS:seen_install'/--><td><input name="submit" type="submit" value="Install the seen module" /></td></form>
+		<form action="[!V 'EXIT:FORM:seen_remove'/]" method="GET"><!--V 'EXIT:PARAMS:seen_remove'/--><td><input name="submit" type="submit" value="Remove the seen module" /></td></form>
+	</tr>
+	</table>
+	<script>
+	document.forms[0].submit.focus();
+	</script>
+<!--/BV-->
