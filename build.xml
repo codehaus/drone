@@ -117,6 +117,7 @@
 				includes="${packageroot}/**"
 				fork="${fork}"
 				executable="${executable}"
+				debug="${debug}"
 				source="1.4">
 			<src path="${java.dir}"/>
 			<src path="${implementations.dir}"/>
