@@ -13,7 +13,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../lib/rife-0.7.2_pre.jar!/" />
+          <root url="jar://$MODULE_DIR$/../lib/rife-0.7.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
