@@ -202,6 +202,7 @@
 			<pathelement path="${env.CLASSPATH}" />
 			<path refid="jetty.classpath" />
 			<path refid="lib.classpath" />
+			<pathelement location="${build.dist}/${name}-${version}.jar"/>
 			<pathelement location="${src.dir}"/>
 			<pathelement location="${build.classes}"/>
 		</classpath>
@@ -222,6 +223,7 @@
 			<pathelement path="${env.CLASSPATH}" />
 			<path refid="jetty.classpath" />
 			<path refid="lib.classpath" />
+			<pathelement location="${build.dist}/${name}-${version}.jar"/>
 			<pathelement location="${src.dir}"/>
 			<pathelement location="${build.classes}"/>
 		</classpath>
