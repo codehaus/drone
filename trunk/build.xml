@@ -20,6 +20,7 @@
 	<property name="deprecation" value="on"/>
 
 	<property name="bin.dir" value="${basedir}/bin"/>
+	<property name="docs.dir" value="${basedir}/docs"/>
 	<property name="lib.dir" value="${basedir}/lib"/>
 	<property name="src.dir" value="${basedir}/src"/>
 	<property name="java.dir" value="${src.dir}/java"/>
@@ -208,6 +209,7 @@
 		<property name="standalone.dir" value="${build.dist}/zip/${name}-${version}"/>
 		<mkdir dir="${standalone.dir}/bin"/>
 		<mkdir dir="${standalone.dir}/build/dist"/>
+		<mkdir dir="${standalone.dir}/docs"/>
 		<mkdir dir="${standalone.dir}/jetty"/>
 		<mkdir dir="${standalone.dir}/lib"/>
 		<mkdir dir="${standalone.dir}/web"/>
@@ -215,6 +217,11 @@
 		<copy todir="${standalone.dir}/bin">
 			<fileset dir="${bin.dir}">
 				<include name="*"/>
+			</fileset>
+		</copy>
+		<copy todir="${standalone.dir}/docs">
+			<fileset dir="${docs.dir}">
+				<include name="**"/>
 			</fileset>
 		</copy>
 		<copy todir="${standalone.dir}/lib">
