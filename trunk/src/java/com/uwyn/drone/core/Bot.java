@@ -654,7 +654,8 @@ public class Bot implements Runnable, ServerListener, ResponseListener, CommandL
 					}
 				}
 				// check if this was a private message
-				else if (((String)message.getParameters().get(0)).toLowerCase().equals(mConnectedNick.toLowerCase()))
+				else if (mConnectedNick != null &&
+						 ((String)message.getParameters().get(0)).toLowerCase().equals(mConnectedNick.toLowerCase()))
 				{
 					dispatchModuleMessage((Collection)mMessageCommands.get(command), new MessageCommand(message, command, arguments));
 				}
