@@ -645,14 +645,12 @@ public class Bot implements Runnable, ServerListener, ResponseListener, CommandL
 				{
 					Channel channel = mServer.getChannel((String)message.getParameters().get(0));
 	
+					dispatchModuleMessage(mChannelMessageModules, new ChannelMessage(message, channel));
+
 					// send the commands to all the modules that handle them
 					if (message.getTrailing().startsWith("!"))
 					{
 						dispatchModuleMessage((Collection)mChannelCommands.get(command), new ChannelCommand(message, channel, command, arguments));
-					}
-					else
-					{
-						dispatchModuleMessage(mChannelMessageModules, new ChannelMessage(message, channel));
 					}
 				}
 				// check if this was a private message
