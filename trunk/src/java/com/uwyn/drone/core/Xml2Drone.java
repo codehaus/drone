@@ -105,7 +105,7 @@ public class Xml2Drone extends Xml2Data
 			
 			mCurrentBot = BotFactory.get(name);
 			mBots.add(mCurrentBot);
-			mCurrentBot.initialize(nick, alt_nick, real_name, new Server(server_name, (ServerInfo)mServerInfos.get(server_name)));
+			mCurrentBot.initialize(nick, alt_nick, real_name, new Server(server_name, (ServerInfo)mServerInfos.get(server_name), mCurrentBot));
 		}
 		else if (qName.equals("channel"))
 		{

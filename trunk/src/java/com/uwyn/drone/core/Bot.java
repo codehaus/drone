@@ -43,7 +43,7 @@ public class Bot implements Runnable, ServerListener, ResponseListener, CommandL
 	
 	private HashSet		mJoinedChannels = null;
 	private HashSet		mBotListeners = null;
-	private Integer		mBotListenersMonitor = new Integer(0);
+	private Object		mBotListenersMonitor = new Object();
 	private boolean		mPaused = false;
 	
 	private ArrayList		mModules = new ArrayList();
@@ -85,6 +85,20 @@ public class Bot implements Runnable, ServerListener, ResponseListener, CommandL
 		mServer.addCommandListener(this);
 	}
 	
+	public ServerMessage createServerMessage(IrcCommand command)
+	{
+		StringBuffer raw = new StringBuffer(":");
+		synchronized (raw)	// thread lock pre-allocation
+		{
+			raw.append(getConnectedNick());
+			raw.append("!~");
+			raw.append(getName());
+			raw.append("@localhost ");
+			raw.append(command.getCommand());
+			return ServerMessage.parse(raw.toString());
+		}
+	}
+		
 	public void send(IrcCommand command)
 	throws CoreException
 	{
@@ -652,66 +666,51 @@ public class Bot implements Runnable, ServerListener, ResponseListener, CommandL
 
 	private void fireLoggedOn()
 	{
-		synchronized (mBotListenersMonitor)
+		Iterator	listeners = mBotListeners.iterator();
+		
+		while (listeners.hasNext())
 		{
-			Iterator	listeners = mBotListeners.iterator();
-			
-			while (listeners.hasNext())
-			{
-				((BotListener)listeners.next()).loggedOn(this);
-			}
+			((BotListener)listeners.next()).loggedOn(this);
 		}
 	}
 
 	private void fireLoggedOff()
 	{
-		synchronized (mBotListenersMonitor)
+		Iterator	listeners = mBotListeners.iterator();
+		
+		while (listeners.hasNext())
 		{
-			Iterator	listeners = mBotListeners.iterator();
-			
-			while (listeners.hasNext())
-			{
-				((BotListener)listeners.next()).loggedOff(this);
-			}
+			((BotListener)listeners.next()).loggedOff(this);
 		}
 	}
 
 	private void fireNickChanged()
 	{
-		synchronized (mBotListenersMonitor)
+		Iterator	listeners = mBotListeners.iterator();
+		
+		while (listeners.hasNext())
 		{
-			Iterator	listeners = mBotListeners.iterator();
-			
-			while (listeners.hasNext())
-			{
-				((BotListener)listeners.next()).nickChanged(this);
-			}
+			((BotListener)listeners.next()).nickChanged(this);
 		}
 	}
 
 	private void fireNickInUse(String nick)
 	{
-		synchronized (mBotListenersMonitor)
+		Iterator	listeners = mBotListeners.iterator();
+		
+		while (listeners.hasNext())
 		{
-			Iterator	listeners = mBotListeners.iterator();
-			
-			while (listeners.hasNext())
-			{
-				((BotListener)listeners.next()).nickInUse(this, nick);
-			}
+			((BotListener)listeners.next()).nickInUse(this, nick);
 		}
 	}
 
 	private void fireConnectionError(Throwable e)
 	{
-		synchronized (mBotListenersMonitor)
+		Iterator	listeners = mBotListeners.iterator();
+		
+		while (listeners.hasNext())
 		{
-			Iterator	listeners = mBotListeners.iterator();
-			
-			while (listeners.hasNext())
-			{
-				((BotListener)listeners.next()).connectionError(this, e);
-			}
+			((BotListener)listeners.next()).connectionError(this, e);
 		}
 	}
 
@@ -725,7 +724,9 @@ public class Bot implements Runnable, ServerListener, ResponseListener, CommandL
 		{
 			if (!mBotListeners.contains(listener))
 			{
-				result = mBotListeners.add(listener);
+				HashSet clone = (HashSet)mBotListeners.clone();
+				result = clone.add(listener);
+				mBotListeners = clone;
 			}
 			else
 			{
@@ -746,7 +747,9 @@ public class Bot implements Runnable, ServerListener, ResponseListener, CommandL
 		
 		synchronized (mBotListenersMonitor)
 		{
-			result = mBotListeners.remove(listener);
+			HashSet clone = (HashSet)mBotListeners.clone();
+			result = clone.remove(listener);
+			mBotListeners = clone;
 		}
 		
 		assert false == mBotListeners.contains(listener);

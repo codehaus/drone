@@ -20,11 +20,11 @@ import java.util.logging.Logger;
 public class BotsRunner extends Thread implements BotListener
 {
 	private Collection	mBots = null;
-	private Integer 	mBotsMonitor = new Integer(0);
+	private Object	 	mBotsMonitor = new Object();
 	
 	private Throwable	mBotError = null;
 	private HashSet		mBotsRunnerListeners = null;
-	private Integer		mBotsRunnerListenersMonitor = new Integer(0);
+	private Object		mBotsRunnerListenersMonitor = new Object();
 	
 	public BotsRunner(Collection bots)
 	{
@@ -162,14 +162,11 @@ public class BotsRunner extends Thread implements BotListener
 
 	private void fireFinished()
 	{
-		synchronized (mBotsRunnerListenersMonitor)
+		Iterator	listeners = mBotsRunnerListeners.iterator();
+		
+		while (listeners.hasNext())
 		{
-			Iterator	listeners = mBotsRunnerListeners.iterator();
-			
-			while (listeners.hasNext())
-			{
-				((BotsRunnerListener)listeners.next()).finished(this);
-			}
+			((BotsRunnerListener)listeners.next()).finished(this);
 		}
 	}
 
@@ -183,7 +180,9 @@ public class BotsRunner extends Thread implements BotListener
 		{
 			if (!mBotsRunnerListeners.contains(listener))
 			{
-				result = mBotsRunnerListeners.add(listener);
+				HashSet clone = (HashSet)mBotsRunnerListeners.clone();
+				result = clone.add(listener);
+				mBotsRunnerListeners = clone;
 			}
 			else
 			{
@@ -204,7 +203,9 @@ public class BotsRunner extends Thread implements BotListener
 		
 		synchronized (mBotsRunnerListenersMonitor)
 		{
-			result = mBotsRunnerListeners.remove(listener);
+			HashSet clone = (HashSet)mBotsRunnerListeners.clone();
+			result = clone.remove(listener);
+			mBotsRunnerListeners = clone;
 		}
 		
 		assert false == mBotsRunnerListeners.contains(listener);

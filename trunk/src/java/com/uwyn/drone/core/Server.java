@@ -30,6 +30,7 @@ public class Server implements Runnable, TimedOutputStreamListener
 	private String			mServerName = null;
 	private ServerInfo		mServerInfo = null;
 	private Thread			mServerThread = null;
+	private Bot				mBot = null;
 	
 	private	Socket				mServerSocket = null;
 	private BufferedReader		mInput = null;
@@ -41,17 +42,19 @@ public class Server implements Runnable, TimedOutputStreamListener
 	private HashSet		mServerListeners = null;
 	private HashSet		mCommandListeners = null;
 	private HashSet		mResponseListeners = null;
-	private Integer		mServerListenersMonitor = new Integer(0);
-	private Integer		mCommandListenersMonitor = new Integer(0);
-	private Integer		mResponseListenersMonitor = new Integer(0);
+	private Object		mServerListenersMonitor = new Object();
+	private Object		mCommandListenersMonitor = new Object();
+	private Object		mResponseListenersMonitor = new Object();
 	
-	Server(String serverName, ServerInfo serverInfo)
+	Server(String serverName, ServerInfo serverInfo, Bot bot)
 	{
 		assert serverName != null;
 		assert serverInfo != null;
+		assert bot != null;
 		
 		mServerName = serverName.toLowerCase();
 		mServerInfo = serverInfo;
+		mBot = bot;
 		
 		mChannels = new HashMap();
 		mServerListeners = new HashSet();
@@ -283,17 +286,7 @@ public class Server implements Runnable, TimedOutputStreamListener
 					// handle the received message
 					else
 					{
-						System.out.println(message_string);
-						
-						ServerMessage	message = ServerMessage.parse(message_string);
-						if (message.isResponse())
-						{
-							fireReceivedResponse(message);
-						}
-						if (message.isCommand())
-						{
-							fireReceivedCommand(message);
-						}
+						fireServerMessageEvents(ServerMessage.parse(message_string));
 					}
 				}
 			}
@@ -307,6 +300,20 @@ public class Server implements Runnable, TimedOutputStreamListener
 		}
 		
 		mServerThread = null;
+	}
+	
+	private void fireServerMessageEvents(ServerMessage message)
+	{
+		System.out.println(message.getRaw());
+		
+		if (message.isResponse())
+		{
+			fireReceivedResponse(message);
+		}
+		if (message.isCommand())
+		{
+			fireReceivedCommand(message);
+		}
 	}
 	
 	public boolean isConnected()
@@ -336,6 +343,8 @@ public class Server implements Runnable, TimedOutputStreamListener
 		}
 		
 		flush();
+		
+		fireServerMessageEvents(mBot.createServerMessage(command));
 	
 		return true;
 	}
@@ -387,67 +396,55 @@ public class Server implements Runnable, TimedOutputStreamListener
 	private void fireConnected()
 	throws CoreException
 	{
-		synchronized (mServerListenersMonitor)
+		Iterator	listeners = mServerListeners.iterator();
+		
+		while (listeners.hasNext())
 		{
-			Iterator	listeners = mServerListeners.iterator();
-			
-			while (listeners.hasNext())
-			{
-				((ServerListener)listeners.next()).connected(this);
-			}
+			((ServerListener)listeners.next()).connected(this);
 		}
 	}
 
 	private void fireDisconnected()
 	throws CoreException
 	{
-		synchronized (mServerListenersMonitor)
+		Iterator	listeners = mServerListeners.iterator();
+		
+		while (listeners.hasNext())
 		{
-			Iterator	listeners = mServerListeners.iterator();
-			
-			while (listeners.hasNext())
-			{
-				((ServerListener)listeners.next()).disconnected(this);
-			}
+			((ServerListener)listeners.next()).disconnected(this);
 		}
 	}
 
 	private void fireReceivedCommand(ServerMessage command)
 	{
-		synchronized (mCommandListenersMonitor)
+		Iterator	listeners = mCommandListeners.iterator();
+		
+		while (listeners.hasNext())
 		{
-			Iterator	listeners = mCommandListeners.iterator();
-			
-			while (listeners.hasNext())
+			try
 			{
-				try
-				{
-					((CommandListener)listeners.next()).receivedCommand(command);
-				}
-				catch (CoreException e)
-				{
-					Logger.getLogger("com.uwyn.drone.core").severe(ExceptionUtils.getExceptionStackTrace(e));
-				}
+				((CommandListener)listeners.next()).receivedCommand(command);
+			}
+			catch (CoreException e)
+			{
+				Logger.getLogger("com.uwyn.drone.core").severe(ExceptionUtils.getExceptionStackTrace(e));
 			}
 		}
 	}
 
 	private void fireReceivedResponse(ServerMessage Response)
 	{
-		synchronized (mResponseListenersMonitor)
+		Iterator	listeners = mResponseListeners.iterator();
+		
+		while (listeners.hasNext())
 		{
-			Iterator	listeners = mResponseListeners.iterator();
-			
-			while (listeners.hasNext())
+			try
 			{
-				try
-				{
-					((ResponseListener)listeners.next()).receivedResponse(Response);
-				}
-				catch (CoreException e)
-				{
-					Logger.getLogger("com.uwyn.drone.core").severe(ExceptionUtils.getExceptionStackTrace(e));
-				}
+				((ResponseListener)listeners.next()).receivedResponse(Response);
+			}
+			catch (CoreException e)
+			{
+				Logger.getLogger("com.uwyn.drone.core").severe(ExceptionUtils.getExceptionStackTrace(e));
 			}
 		}
 	}
@@ -462,7 +459,9 @@ public class Server implements Runnable, TimedOutputStreamListener
 		{
 			if (!mServerListeners.contains(listener))
 			{
-				result = mServerListeners.add(listener);
+				HashSet clone = (HashSet)mServerListeners.clone();
+				result = clone.add(listener);
+				mServerListeners = clone;
 			}
 			else
 			{
@@ -483,7 +482,9 @@ public class Server implements Runnable, TimedOutputStreamListener
 		
 		synchronized (mServerListenersMonitor)
 		{
-			result = mServerListeners.remove(listener);
+			HashSet clone = (HashSet)mServerListeners.clone();
+			result = clone.remove(listener);
+			mServerListeners = clone;
 		}
 		
 		assert false == mServerListeners.contains(listener);
@@ -501,7 +502,9 @@ public class Server implements Runnable, TimedOutputStreamListener
 		{
 			if (!mCommandListeners.contains(listener))
 			{
-				result = mCommandListeners.add(listener);
+				HashSet clone = (HashSet)mCommandListeners.clone();
+				result = clone.add(listener);
+				mCommandListeners = clone;
 			}
 			else
 			{
@@ -522,7 +525,9 @@ public class Server implements Runnable, TimedOutputStreamListener
 		
 		synchronized (mCommandListenersMonitor)
 		{
-			result = mCommandListeners.remove(listener);
+			HashSet clone = (HashSet)mCommandListeners.clone();
+			result = clone.remove(listener);
+			mCommandListeners = clone;
 		}
 		
 		assert false == mCommandListeners.contains(listener);
@@ -540,7 +545,9 @@ public class Server implements Runnable, TimedOutputStreamListener
 		{
 			if (!mResponseListeners.contains(listener))
 			{
-				result = mResponseListeners.add(listener);
+				HashSet clone = (HashSet)mResponseListeners.clone();
+				result = clone.add(listener);
+				mResponseListeners = clone;
 			}
 			else
 			{
@@ -561,7 +568,9 @@ public class Server implements Runnable, TimedOutputStreamListener
 		
 		synchronized (mResponseListenersMonitor)
 		{
-			result = mResponseListeners.remove(listener);
+			HashSet clone = (HashSet)mResponseListeners.clone();
+			result = clone.remove(listener);
+			mResponseListeners = clone;
 		}
 		
 		assert false == mResponseListeners.contains(listener);

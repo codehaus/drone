@@ -20,7 +20,7 @@ public class TimedOutputStream extends FilterOutputStream
 	private Consumer	mConsumer = null;
 	private byte[]		mBuffer = null;
 	private HashSet		mListeners = null;
-	private Integer		mListenersMonitor = new Integer(0);
+	private Object		mListenersMonitor = new Object();
 	
 	public TimedOutputStream(OutputStream outputStream, int max, int amount, int interval)
 	{
@@ -108,14 +108,11 @@ public class TimedOutputStream extends FilterOutputStream
 
 	private void fireExceptionThrown(IOException e)
 	{
-		synchronized (mListenersMonitor)
+		Iterator	listeners = mListeners.iterator();
+		
+		while (listeners.hasNext())
 		{
-			Iterator	listeners = mListeners.iterator();
-			
-			while (listeners.hasNext())
-			{
-				((TimedOutputStreamListener)listeners.next()).exceptionThrow(e);
-			}
+			((TimedOutputStreamListener)listeners.next()).exceptionThrow(e);
 		}
 	}
 
@@ -129,7 +126,9 @@ public class TimedOutputStream extends FilterOutputStream
 		{
 			if (!mListeners.contains(listener))
 			{
-				result = mListeners.add(listener);
+				HashSet clone = (HashSet)mListeners.clone();
+				result = clone.add(listener);
+				mListeners = clone;
 			}
 			else
 			{
@@ -150,7 +149,9 @@ public class TimedOutputStream extends FilterOutputStream
 		
 		synchronized (mListenersMonitor)
 		{
-			result = mListeners.remove(listener);
+			HashSet clone = (HashSet)mListeners.clone();
+			result = clone.remove(listener);
+			mListeners = clone;
 		}
 		
 		assert false == mListeners.contains(listener);
