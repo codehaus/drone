@@ -238,6 +238,7 @@
 			</fileset>
 		</copy>
 		<copy file="${basedir}/COPYING" todir="${standalone.dir}"/>
+		<copy file="${basedir}/README" todir="${standalone.dir}"/>
 		<copy file="${build.dist}/${name}-${version}.jar" todir="${standalone.dir}/build/dist"/>
 		<zip destfile="${build.dist}/${name}-${version}.zip" basedir="${build.dist}/zip"/>
 		<delete dir="${build.dist}/zip"/>
@@ -257,6 +258,7 @@
 			<doctitle><![CDATA[<h1>Drone</h1>]]></doctitle>
 			<bottom><![CDATA[<i>Copyright &#169; 2002-2004 Geert Bevin and UWYN. All Rights Reserved.</i>]]></bottom>
 			<link href="http://java.sun.com/j2se/1.4.2/docs/api/"/>
+			<link href="http://rifers.org/docs/api/"/>
 			<arg value="-encoding"/>
 			<arg value="UTF-8"/>
 		</javadoc>
