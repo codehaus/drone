@@ -237,6 +237,7 @@
 				<include name="rep/**"/>
 			</fileset>
 		</copy>
+		<copy file="${basedir}/COPYING" todir="${standalone.dir}"/>
 		<copy file="${build.dist}/${name}-${version}.jar" todir="${standalone.dir}/build/dist"/>
 		<zip destfile="${build.dist}/${name}-${version}.zip" basedir="${build.dist}/zip"/>
 		<delete dir="${build.dist}/zip"/>
